@@ -229,7 +229,10 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
+  'tpope/vim-rails',
+  'tpope/vim-bundler',
+  'tpope/vim-dispatch',
+  'tpope/vim-surround',
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -618,6 +621,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         gopls = {},
+        ruby_lsp = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -717,6 +721,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
+        eruby = { 'erb_format' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
@@ -751,6 +756,9 @@ require('lazy').setup({
             end,
           },
         },
+      },
+      {
+        'tzachar/cmp-ai', -- jao ollama / ai assistance
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -825,6 +833,19 @@ require('lazy').setup({
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+
+          -- jao completion for ollama / ai
+          ['<C-x>'] = cmp.mapping(
+            cmp.mapping.complete {
+              config = {
+                sources = cmp.config.sources {
+                  { name = 'cmp_ai' },
+                },
+              },
+            },
+            { 'i' }
+          ),
+          -- jao
         },
         sources = {
           {
@@ -835,11 +856,42 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'cmp_ai' }, -- jao add ollama /ai source
         },
       }
     end,
   },
 
+  -- jao config for ollama / ai support
+  {
+    'tzachar/cmp-ai',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = function()
+      local cmp_ai = require 'cmp_ai.config'
+
+      cmp_ai:setup {
+        max_lines = 100,
+        provider = 'Ollama',
+        provider_options = {
+          model = 'qwen3:30b-a3b',
+          auto_unload = false, -- Set to true to automatically unload the model when
+          -- exiting nvim.
+        },
+        notify = true,
+        notify_callback = function(msg)
+          vim.notify(msg)
+        end,
+        run_on_every_keystroke = true,
+        ignored_file_types = {
+          -- default is not to ignore
+          -- uncomment to ignore in lua:
+          -- lua = true
+        },
+      }
+    end,
+  },
+  -- jao
+  --
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
