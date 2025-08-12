@@ -757,9 +757,9 @@ require('lazy').setup({
           },
         },
       },
-      {
-        'tzachar/cmp-ai', -- jao ollama / ai assistance
-      },
+      --{
+      -- 'tzachar/cmp-ai', -- jao ollama / ai assistance
+      --},
       'saadparwaiz1/cmp_luasnip',
 
       -- Adds other completion capabilities.
@@ -835,16 +835,16 @@ require('lazy').setup({
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 
           -- jao completion for ollama / ai
-          ['<C-x>'] = cmp.mapping(
-            cmp.mapping.complete {
-              config = {
-                sources = cmp.config.sources {
-                  { name = 'cmp_ai' },
-                },
-              },
-            },
-            { 'i' }
-          ),
+          --['<C-x>'] = cmp.mapping(
+          -- cmp.mapping.complete {
+          -- config = {
+          --  sources = cmp.config.sources {
+          --   { name = 'cmp_ai' },
+          --},
+          --},
+          --},
+          --{ 'i' }
+          --),
           -- jao
         },
         sources = {
@@ -856,40 +856,40 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-          { name = 'cmp_ai' }, -- jao add ollama /ai source
+          --{ name = 'cmp_ai' }, -- jao add ollama /ai source
         },
       }
     end,
   },
 
   -- jao config for ollama / ai support
-  {
-    'tzachar/cmp-ai',
-    dependencies = 'nvim-lua/plenary.nvim',
-    config = function()
-      local cmp_ai = require 'cmp_ai.config'
+  --{
+  -- 'tzachar/cmp-ai',
+  --dependencies = 'nvim-lua/plenary.nvim',
+  --config = function()
+  -- local cmp_ai = require 'cmp_ai.config'
 
-      cmp_ai:setup {
-        max_lines = 100,
-        provider = 'Ollama',
-        provider_options = {
-          model = 'qwen3:30b-a3b',
-          auto_unload = false, -- Set to true to automatically unload the model when
-          -- exiting nvim.
-        },
-        notify = true,
-        notify_callback = function(msg)
-          vim.notify(msg)
-        end,
-        run_on_every_keystroke = true,
-        ignored_file_types = {
-          -- default is not to ignore
-          -- uncomment to ignore in lua:
-          -- lua = true
-        },
-      }
-    end,
-  },
+  --  cmp_ai:setup {
+  --  max_lines = 100,
+  -- provider = 'Ollama',
+  --  provider_options = {
+  --   model = 'qwen3:30b-a3b',
+  -- auto_unload = false, -- Set to true to automatically unload the model when
+  -- exiting nvim.
+  --},
+  --notify = true,
+  --notify_callback = function(msg)
+  --vim.notify(msg)
+  --end,
+  --run_on_every_keystroke = true,
+  --ignored_file_types = {
+  -- default is not to ignore
+  -- uncomment to ignore in lua:
+  -- lua = true
+  --},
+  --  }
+  -- end,
+  -- },
   -- jao
   --
   { -- You can easily change to a different colorscheme.
