@@ -773,15 +773,15 @@ require('lazy').setup({
             strategies = {
               chat = {
                 adapter = 'ollama',
-                model = 'gpt-oss:120b',
+                model = 'gpt-oss:20b',
               },
               inline = {
                 adapter = 'ollama',
-                model = 'gpt-oss:120b',
+                model = 'gpt-oss:20b',
               },
               cmd = {
                 adapter = 'ollama',
-                model = 'gpt-oss:120b',
+                model = 'gpt-oss:20b',
               },
             },
             opts = {
