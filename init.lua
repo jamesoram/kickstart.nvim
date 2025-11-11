@@ -776,6 +776,12 @@ require('lazy').setup({
                 model = 'gpt-oss:120b',
               },
             },
+            inline = {
+              adapter = 'ollama',
+            },
+            cmd = {
+              adapter = 'ollama',
+            },
             opts = {
               log_level = 'INFO',
             },
