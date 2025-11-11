@@ -761,6 +761,28 @@ require('lazy').setup({
       --{
       -- 'tzachar/cmp-ai', -- jao ollama / ai assistance
       --},
+      {
+        'olimorris/codecompanion.nvim',
+        opts = {},
+        dependencies = {
+          'nvim-lua/plenary.nvim',
+        },
+
+        config = function()
+          require('codecompanion').setup {
+            strategies = {
+              chat = {
+                adapter = 'ollama',
+                model = 'gpt-oss:120b',
+              },
+            },
+            opts = {
+              log_level = 'INFO',
+            },
+          }
+        end,
+      },
+      --
       'saadparwaiz1/cmp_luasnip',
 
       -- Adds other completion capabilities.
