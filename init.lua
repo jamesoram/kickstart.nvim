@@ -775,12 +775,14 @@ require('lazy').setup({
                 adapter = 'ollama',
                 model = 'gpt-oss:120b',
               },
-            },
-            inline = {
-              adapter = 'ollama',
-            },
-            cmd = {
-              adapter = 'ollama',
+              inline = {
+                adapter = 'ollama',
+                model = 'gpt-oss:120b',
+              },
+              cmd = {
+                adapter = 'ollama',
+                model = 'gpt-oss:120b',
+              },
             },
             opts = {
               log_level = 'INFO',
